@@ -13,13 +13,13 @@ Em alinhamento com esta premissa de simplicidade, a solução omite a criação 
 A Clean Architecture estabelece uma rigorosa separação de responsabilidades organizada em quatro camadas concêntricas (Apresentação, Aplicação, Domínio e Infraestrutura). Duas dessas camadas — Domínio (Entidades) e Aplicação (Casos de Uso) — são designadas para proteger o Domínio de Negócio (Core), sendo totalmente independentes de tecnologia.
 A organização da arquitetura se dá em anéis concêntricos, regidos pela Regra de Dependência: as dependências entre as camadas devem sempre apontar para dentro (do exterior para o interior). Isso significa que uma camada mais externa (ou anel mais externo) só pode referenciar (ou depender) de camadas que lhe são mais internas, garantindo que o núcleo do negócio seja isolado e protegido de detalhes de implementação externos.
 
-### Apresentação (*Presentation - api)*
+### - **Apresentação** (*Presentation*)
 
-### Aplicação (*Application - classlib)*
+### - **Aplicação** (*Application*)
 
-### Domínio (*Domain - classlib)*
+### - **Domínio** (*Domain*)
 
-### Infraestrutura (*Infrastructure - classlib)*
+### - **Infraestrutura** (*Infrastructure*)
 #### Migrations
 1. Adicionar versão
 ```powershell
