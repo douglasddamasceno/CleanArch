@@ -10,16 +10,21 @@ Em alinhamento com esta premissa de simplicidade, a solução omite a criação 
 > Particularmente, priorizo os Métodos de Extensão por promoverem um fluxo de dados mais transparente e desacoplado de bibliotecas de terceiros.
 
 ## Camadas da Solução ou Anéis da Arquitetura
-A Clean Architecture estabelece uma rigorosa separação de responsabilidades organizada em quatro camadas concêntricas (Apresentação, Aplicação, Domínio e Infraestrutura). Duas dessas camadas — Domínio (Entidades) e Aplicação (Casos de Uso) — são designadas para proteger o Domínio de Negócio (Core), sendo totalmente independentes de tecnologia.
+A Clean Architecture estabelece uma rigorosa separação de responsabilidades organizada em quatro camadas concêntricas (Domínio, Aplicação, Apresentação e Infraestrutura). Duas dessas camadas — Domínio (Entidades) e Aplicação (Casos de Uso) — são designadas para proteger o Domínio de Negócio (Core), sendo totalmente independentes de tecnologia.
 A organização da arquitetura se dá em anéis concêntricos, regidos pela Regra de Dependência: as dependências entre as camadas devem sempre apontar para dentro (do exterior para o interior). Isso significa que uma camada mais externa (ou anel mais externo) só pode referenciar (ou depender) de camadas que lhe são mais internas, garantindo que o núcleo do negócio seja isolado e protegido de detalhes de implementação externos.
 
-### - **Apresentação** (*Presentation*)
+### - **Domínio** (*Domain*)
+Detém as Regras de Negócio Empresariais mais fundamentais e duradouras. Essa camada (ou anel) defini as `Entidades` e as regras de estado e de comportamento delas, com esta responsabilidade torna-se o núcleo da solução e é independente de qualquer tecnologia externa.
 
 ### - **Aplicação** (*Application*)
+Contém as Regras de Negócio da Aplicação e orquestra o fluxo de dados. Defini e implementa os `Casos de Uso (Use Cases)`, eles coordenam as `Entidades` e definem as `Interfaces (Contratos)` necessárias para a persistência e comunicação com o banco de dados (ou outro meio exterior).
 
-### - **Domínio** (*Domain*)
+### - **Apresentação** (*Presentation*)
+Responsável por adaptar e apresentar os dados das estruturas internas para as externas (e vice-versa). Inclui `Controladores (APIs)`, `Apresentadores (Presenters)` e a definição de modelos específicos para a entrada/saída de dados.
 
 ### - **Infraestrutura** (*Infrastructure*)
+Possui os detalhes de tecnologia e ferramentas externas. Implementa os detalhes concretos da aplicação, isso inclui a implementação dos `Repositórios (EF Core/SQL)`, servidores web e qualquer outro serviço externo.
+
 #### Migrations
 1. Adicionar versão
 ```powershell
