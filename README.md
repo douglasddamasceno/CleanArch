@@ -9,8 +9,12 @@ Em alinhamento com esta premissa de simplicidade, a solução omite a criação 
 > 
 > Particularmente, priorizo os Métodos de Extensão por promoverem um fluxo de dados mais transparente e desacoplado de bibliotecas de terceiros.
 
-## Projeto
-### Migrations
+## Camadas da Solução ou Anéis da Arquitetura
+### Presentation (api)
+### Application (classlib)
+### Domain (classlib)
+### Infrastructure
+#### Migrations
 1. Adicionar versão
 ```powershell
 dotnet ef migrations add VersaoInicial --startup-project .\src\Api\ --project .\src\Infrastructure\
