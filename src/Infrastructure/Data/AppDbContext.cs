@@ -17,6 +17,11 @@ public class AppDbContext : DbContext
             .IsRequired()
             .HasMaxLength(150);
 
+        modelBuilder.Entity<Produto>()
+            .Property(p => p.Preco)
+            .IsRequired()
+            .HasColumnType("decimal(18,2)");
+
         base.OnModelCreating(modelBuilder);
     }
 }

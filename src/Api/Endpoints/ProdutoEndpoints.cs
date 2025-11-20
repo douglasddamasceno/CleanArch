@@ -1,5 +1,6 @@
 using Application.UseCases.Produtos.CriarProduto;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Api.Endpoints;
 
