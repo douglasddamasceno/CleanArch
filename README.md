@@ -13,6 +13,48 @@ Em alinhamento com esta premissa de simplicidade, a solução omite a criação 
 A Clean Architecture estabelece uma rigorosa separação de responsabilidades organizada em quatro camadas concêntricas (Domínio, Aplicação, Apresentação e Infraestrutura). Duas dessas camadas — Domínio (Entidades) e Aplicação (Casos de Uso) — são designadas para proteger o Domínio de Negócio (Core), sendo totalmente independentes de tecnologia.
 A organização da arquitetura se dá em anéis concêntricos, regidos pela Regra de Dependência: as dependências entre as camadas devem sempre apontar para dentro (do exterior para o interior). Isso significa que uma camada mais externa (ou anel mais externo) só pode referenciar (ou depender) de camadas que lhe são mais internas, garantindo que o núcleo do negócio seja isolado e protegido de detalhes de implementação externos.
 
+- Arquitetura em Anéis
+
+![Clean Architecture]({0FD50927-E9F3-435C-A0FC-A33AAF8ED09E}.png)
+
+- Estrutura de Pastas da Solução
+```
+📁 App
+├── 📁 Api
+│   ├── 📁 Endpoints
+│   │   └── 📄 ProdutoEndpoints.cs
+│   ├── 📁 Properties
+│   │   └── ⚙️ launchSettings.json
+│   ├── 📄 Api.csproj
+│   ├── 📄 Api.http
+│   ├── 📄 Program.cs
+│   ├── ⚙️ appsettings.Development.json
+│   └── ⚙️ appsettings.json
+├── 📁 Application
+│   ├── 📁 Interfaces
+│   │   └── 📄 IProdutoRepository.cs
+│   ├── 📁 UseCases
+│   │   └── 📁 Produtos
+│   │       └── 📁 CriarProduto
+│   │           ├── 📄 CriarProdutoCommand.cs
+│   │           └── 📄 CriarProdutoUseCase.cs
+│   └── 📄 Application.csproj
+├── 📁 Domain
+│   ├── 📁 Entities
+│   │   └── 📄 Produto.cs
+│   └── 📄 Domain.csproj
+└── 📁 Infrastructure
+    ├── 📁 Data
+    │   ├── 📁 Repositories
+    │   │   └── 📄 ProdutoRepository.cs
+    │   └── 📄 AppDbContext.cs
+    ├── 📁 Migrations
+    │   ├── 📄 20251120220824_VersaoInicial.Designer.cs
+    │   ├── 📄 20251120220824_VersaoInicial.cs
+    │   └── 📄 AppDbContextModelSnapshot.cs
+    └── 📄 Infrastructure.csproj
+```
+
 ### - **Domínio** (*Domain*)
 Detém as Regras de Negócio Empresariais mais fundamentais e duradouras. Essa camada (ou anel) defini as `Entidades` e as regras de estado e de comportamento delas, com esta responsabilidade torna-se o núcleo da solução e é independente de qualquer tecnologia externa.
 
