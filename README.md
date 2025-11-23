@@ -15,7 +15,7 @@ A organização da arquitetura se dá em anéis concêntricos, regidos pela Regr
 
 - **Arquitetura em Anéis**
 
-![Clean Architecture]({0FD50927-E9F3-435C-A0FC-A33AAF8ED09E}.png)
+![Clean Architecture](image.png)
 
 - **Estrutura de Pastas da Solução**
 ```
