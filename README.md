@@ -7,7 +7,7 @@ Em alinhamento com esta premissa de simplicidade, a solução omite a criação 
 > 1. Bibliotecas de mapeamento por convenção, como AutoMapper ou Mapster.
 > 2. O uso de Métodos de Extensão (`.ToCommand()`, `.ToResponse()`, ou `.ToEntidade`) ou *mappers* dedicados, que oferecem maior rastreabilidade e menos dependências externas.
 > 
-> Particularmente, priorizo os Métodos de Extensão por promoverem um fluxo de dados mais transparente e desacoplado de bibliotecas de terceiros.
+> Particularmente, priorizo os métodos de extensão por promoverem um fluxo de dados mais transparente e desacoplado de bibliotecas de terceiros.
 
 ## Camadas da Solução ou Anéis da Arquitetura
 A **Clean Architecture** estabelece uma rigorosa separação de responsabilidades organizada em quatro camadas concêntricas (Domínio, Aplicação, Apresentação e Infraestrutura). Duas dessas camadas — Domínio (Entidades) e Aplicação (Casos de Uso) — são designadas para proteger o Domínio de Negócio (*Core*), sendo totalmente independentes de tecnologia.
