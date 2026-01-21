@@ -76,3 +76,5 @@ dotnet ef migrations add VersaoInicial --startup-project .\src\Api\ --project .\
 ```powershell
 dotnet ef database update --startup-project .\src\Api\ --project .\src\Infrastructure\
 ```
+
+continua...
