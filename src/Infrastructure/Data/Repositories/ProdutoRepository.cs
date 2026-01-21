@@ -16,5 +16,14 @@ public class ProdutoRepository : IProdutoRepository
         await _context.Produtos.AddAsync(produto);
         await _context.SaveChangesAsync();
     }
-    // ... Implementação de outros métodos CRUD
+
+    public async Task<Produto> ObterPorIdAsync(Guid guid)
+    {
+        return await _context.Produtos.FirstOrDefaultAsync(p => p.Id == guid);
+    }
+
+    public async Task<IEnumerable<Produto>> ObterTodosAsync()
+    {
+        return await _context.Produtos.ToListAsync();
+    }
 }

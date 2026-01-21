@@ -6,6 +6,8 @@ public class Produto
     public string Nome { get; private set; }
     public decimal Preco { get; private set; }
 
+    private Produto() { }
+
     public Produto(string nome, decimal preco)
     {
 

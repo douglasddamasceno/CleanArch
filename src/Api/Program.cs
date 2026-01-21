@@ -1,6 +1,7 @@
 using Api.Endpoints;
 using Application.Interfaces;
 using Application.UseCases.Produtos.CriarProduto;
+using Application.UseCases.Produtos.ObterProduto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -12,6 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("LojaConnection")));
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<CriarProdutoUseCase>();
+builder.Services.AddScoped<ObterTodosProdutosUseCase>();
+builder.Services.AddScoped<ObterProdutoPorIdUseCase>();
 builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1",
