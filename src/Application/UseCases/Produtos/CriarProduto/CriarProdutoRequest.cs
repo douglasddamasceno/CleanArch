@@ -2,6 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Application.UseCases.Produtos.CriarProduto;
 
-public record CriarProdutoCommand(
+public record CriarProdutoRequest(
     [Required][StringLength(150, MinimumLength = 3)] string Nome,
-    [Required][Range(0.01, 999999)][CreditCard] decimal Preco);
+    [Required][Range(0.01, 999999)] decimal Preco);

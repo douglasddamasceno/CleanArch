@@ -11,9 +11,14 @@ public class ObterTodosProdutosUseCase
         _repository = repository;
     }
 
-    public async Task<IEnumerable<Domain.Entities.Produto>> ExecutarAsync()
+    public async Task<IEnumerable<ProdutoResponse>> ExecutarAsync()
     {
         var produtos = await _repository.ObterTodosAsync();
-        return produtos;
+        return produtos.Select(p => new ProdutoResponse
+        {
+            Id = p.Id,
+            Nome = p.Nome,
+            Preco = p.Preco
+        });
     }
 }

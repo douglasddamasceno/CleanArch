@@ -19,11 +19,24 @@ public class ProdutoRepository : IProdutoRepository
 
     public async Task<Produto> ObterPorIdAsync(Guid guid)
     {
-        return await _context.Produtos.FirstOrDefaultAsync(p => p.Id == guid);
+        return await _context.Produtos.FirstAsync(p => p.Id == guid);
     }
 
     public async Task<IEnumerable<Produto>> ObterTodosAsync()
     {
         return await _context.Produtos.ToListAsync();
+    }
+
+    public async Task AtualizarAsync(Produto produto)
+    {
+        _context.Produtos.Update(produto);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task RemoverAsync(Guid guid)
+    {
+        var produto = await ObterPorIdAsync(guid);
+        _context.Produtos.Remove(produto);
+        await _context.SaveChangesAsync();
     }
 }

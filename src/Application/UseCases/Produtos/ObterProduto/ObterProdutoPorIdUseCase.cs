@@ -11,9 +11,14 @@ public class ObterProdutoPorIdUseCase
         _repository = repository;
     }
 
-    public async Task<Domain.Entities.Produto> ExecutarAsync(Guid id)
+    public async Task<ProdutoResponse> ExecutarAsync(Guid id)
     {
         var produto = await _repository.ObterPorIdAsync(id);
-        return produto;
+        return new ProdutoResponse
+        {
+            Id = produto.Id,
+            Nome = produto.Nome,
+            Preco = produto.Preco
+        };
     }
 }

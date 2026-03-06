@@ -1,6 +1,8 @@
 using Api.Endpoints;
 using Application.Interfaces;
+using Application.UseCases.Produtos.AtualizarProduto;
 using Application.UseCases.Produtos.CriarProduto;
+using Application.UseCases.Produtos.ExcluirProduto;
 using Application.UseCases.Produtos.ObterProduto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -15,6 +17,8 @@ builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<CriarProdutoUseCase>();
 builder.Services.AddScoped<ObterTodosProdutosUseCase>();
 builder.Services.AddScoped<ObterProdutoPorIdUseCase>();
+builder.Services.AddScoped<AtualizarProdutoUseCase>();
+builder.Services.AddScoped<ExcluirProdutoUseCase>();
 builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1",

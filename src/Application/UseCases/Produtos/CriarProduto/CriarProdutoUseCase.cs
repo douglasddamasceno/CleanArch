@@ -12,10 +12,10 @@ public class CriarProdutoUseCase
         _repository = repository;
     }
 
-    public async Task ExecutarAsync(CriarProdutoCommand command)
+    public async Task ExecutarAsync(CriarProdutoRequest request)
     {
         // 1. Regras de Negócio e Validação (Usando a Entidade do Domain)
-        var produto = new Produto(command.Nome, command.Preco);
+        var produto = new Produto(request.Nome, request.Preco);
 
         // 2. Persistência (Chama a Infraestrutura via Repositório)
         await _repository.AdicionarAsync(produto);

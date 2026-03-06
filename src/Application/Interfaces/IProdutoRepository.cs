@@ -8,6 +8,6 @@ public interface IProdutoRepository
     Task AdicionarAsync(Produto produto);
     Task<Produto> ObterPorIdAsync(Guid id);
     Task<IEnumerable<Produto>> ObterTodosAsync();
-    //Task AtualizarAsync(Produto produto);
-    //Task RemoverAsync(Produto produto);
+    Task AtualizarAsync(Produto produto);
+    Task RemoverAsync(Guid id);
 }
