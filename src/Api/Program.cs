@@ -4,8 +4,8 @@ using Application.UseCases.Produtos.AtualizarProduto;
 using Application.UseCases.Produtos.CriarProduto;
 using Application.UseCases.Produtos.ExcluirProduto;
 using Application.UseCases.Produtos.ObterProduto;
+using CleanArch.Api.Config;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,43 +19,13 @@ builder.Services.AddScoped<ObterTodosProdutosUseCase>();
 builder.Services.AddScoped<ObterProdutoPorIdUseCase>();
 builder.Services.AddScoped<AtualizarProdutoUseCase>();
 builder.Services.AddScoped<ExcluirProdutoUseCase>();
-builder.Services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1",
-                new OpenApiInfo
-                {
-                    Title = "Clean Architecture",
-                    Version = "v1.0",
-                    Description = "Base arquitetural para aplicações .NET seguindo os princípios da Arquitetura Limpa (Clean Arch).",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Douglas Damasceno",
-                        Email = "douglasddx@gmail.com",
-                        Url = new Uri("https://github.com/douglasddamasceno/")
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "MIT License",
-                        Url = new Uri("https://opensource.org/licenses/MIT")
-                    }
-                }
-            );
-        });
+builder.Services.AddSwagger();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Clean Arch API v1");
-    c.RoutePrefix = string.Empty;
-});
-
-app.MapGet("/health", () =>
-{
-    return DateTime.Now;
-})
-.WithName("Health");
+app.UseHealthChecks("/health");
 
 app.MapProdutoEndpoints();
 
