@@ -41,6 +41,7 @@ builder.Services.AddSwaggerGen(c =>
                 }
             );
         });
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 app.UseHttpsRedirection();
@@ -50,12 +51,7 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Clean Arch API v1");
     c.RoutePrefix = string.Empty;
 });
-
-app.MapGet("/health", () =>
-{
-    return DateTime.Now;
-})
-.WithName("Health");
+app.UseHealthChecks("/health");
 
 app.MapProdutoEndpoints();
 
