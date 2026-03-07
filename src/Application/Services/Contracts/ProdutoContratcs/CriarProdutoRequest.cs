@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.UseCases.Produtos.CriarProduto;
+namespace Application.Services.Contracts.ProdutoContratcs;
 
 public record CriarProdutoRequest(
     [Required][StringLength(150, MinimumLength = 3)] string Nome,

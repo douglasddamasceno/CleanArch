@@ -1,7 +1,5 @@
-using Application.UseCases.Produtos.AtualizarProduto;
-using Application.UseCases.Produtos.CriarProduto;
-using Application.UseCases.Produtos.ExcluirProduto;
-using Application.UseCases.Produtos.ObterProduto;
+using Application.Services;
+using Application.Services.Contracts.ProdutoContratcs;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -47,16 +45,16 @@ public static class ProdutoEndpoints
 
     private static async Task<IResult> CriarProduto(
     [FromBody] CriarProdutoRequest request,
-    [FromServices] CriarProdutoUseCase useCase)
+    [FromServices] ProdutoService service)
     {
-        await useCase.ExecutarAsync(request);
+        await service.CreateAsync(request);
         return TypedResults.Created();
     }
 
     private static async Task<IResult> ObterProdutos(
-    [FromServices] ObterTodosProdutosUseCase useCase)
+    [FromServices] ProdutoService service)
     {
-        var produtos = await useCase.ExecutarAsync();
+        var produtos = await service.GetAllAsync();
         if (!produtos.Any() || produtos is null)
             return TypedResults.NotFound();
 
@@ -65,26 +63,26 @@ public static class ProdutoEndpoints
 
     private static async Task<IResult> ObterProdutoPorId(
     [FromRoute, Required] Guid id,
-    [FromServices] ObterProdutoPorIdUseCase useCase)
+    [FromServices] ProdutoService service)
     {
-        var produto = await useCase.ExecutarAsync(id);
+        var produto = await service.GetByIdAsync(id);
         return produto is not null ? TypedResults.Ok(produto) : TypedResults.NotFound();
     }
 
     private static async Task<IResult> AtualizarProduto(
     [FromRoute, Required] Guid id,
     [FromBody] AtualizarProdutoRequest request,
-    [FromServices] AtualizarProdutoUseCase useCase)
+    [FromServices] ProdutoService service)
     {
-        await useCase.ExecutarAsync(id, request);
+        await service.UpdateAsync(id, request);
         return TypedResults.Ok();
     }
 
     private static async Task<IResult> ExcluirProduto(
     [FromRoute, Required] Guid id,
-    [FromServices] ExcluirProdutoUseCase useCase)
+    [FromServices] ProdutoService service)
     {
-        await useCase.ExecutarAsync(id);
+        await service.DeleteAsync(id);
         return TypedResults.Ok();
     }
 }

@@ -4,7 +4,7 @@ namespace CleanArch.Api.Config;
 
 public static class SwaggerConfig
 {
-    public static void AddSwagger(this IServiceCollection services)
+    public static void AddSwaggerConfig(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c =>
@@ -31,7 +31,7 @@ public static class SwaggerConfig
         });
     }
 
-    public static void UseSwagger(this WebApplication app)
+    public static void UseSwaggerConfig(this WebApplication app)
     {
         app.UseSwagger();
         app.UseSwaggerUI(c =>

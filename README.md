@@ -18,9 +18,10 @@ A organização da arquitetura se dá em anéis concêntricos, regidos pela Regr
 ![Clean Architecture](image.png)
 
 - **Estrutura de Pastas da Solução**
-```
-📁 App
+App
 ├── 📁 Api
+│   ├── 📁 Config
+│   │   └── 📄 SwaggerConfig.cs
 │   ├── 📁 Endpoints
 │   │   └── 📄 ProdutoEndpoints.cs
 │   ├── 📁 Properties
@@ -33,11 +34,13 @@ A organização da arquitetura se dá em anéis concêntricos, regidos pela Regr
 ├── 📁 Application
 │   ├── 📁 Interfaces
 │   │   └── 📄 IProdutoRepository.cs
-│   ├── 📁 UseCases
-│   │   └── 📁 Produtos
-│   │       └── 📁 CriarProduto
-│   │           ├── 📄 CriarProdutoCommand.cs
-│   │           └── 📄 CriarProdutoUseCase.cs
+│   ├── 📁 Services
+│   │   ├── 📁 Contracts
+│   │   │   └── 📁 ProdutoContratcs
+│   │   │       ├── 📄 AtualizarProdutoRequest.cs
+│   │   │       ├── 📄 CriarProdutoRequest.cs
+│   │   │       └── 📄 ProdutoResponse.cs
+│   │   └── 📄 ProdutoService.cs
 │   └── 📄 Application.csproj
 ├── 📁 Domain
 │   ├── 📁 Entities
@@ -48,10 +51,6 @@ A organização da arquitetura se dá em anéis concêntricos, regidos pela Regr
     │   ├── 📁 Repositories
     │   │   └── 📄 ProdutoRepository.cs
     │   └── 📄 AppDbContext.cs
-    ├── 📁 Migrations
-    │   ├── 📄 20251120220824_VersaoInicial.Designer.cs
-    │   ├── 📄 20251120220824_VersaoInicial.cs
-    │   └── 📄 AppDbContextModelSnapshot.cs
     └── 📄 Infrastructure.csproj
 ```
 

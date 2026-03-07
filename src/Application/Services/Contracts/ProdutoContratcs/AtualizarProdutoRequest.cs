@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.UseCases.Produtos.AtualizarProduto;
+namespace Application.Services.Contracts.ProdutoContratcs;
 
 public record AtualizarProdutoRequest(
     [Required] Guid Id,
