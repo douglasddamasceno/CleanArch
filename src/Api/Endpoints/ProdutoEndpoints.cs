@@ -1,5 +1,5 @@
 using Application.Services;
-using Application.Services.Contracts.ProdutoContratcs;
+using Application.Services.Models.ProdutoModels;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 

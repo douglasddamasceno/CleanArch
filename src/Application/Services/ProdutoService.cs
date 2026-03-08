@@ -1,5 +1,5 @@
 using Application.Interfaces;
-using Application.Services.Contracts.ProdutoContratcs;
+using Application.Services.Models.ProdutoModels;
 using Domain.Entities;
 
 namespace Application.Services;
@@ -24,11 +24,9 @@ public class ProdutoService
 
     public async Task UpdateAsync(Guid id, AtualizarProdutoRequest request)
     {
-        // 1. Obter Produto Existente e Atualizar com as regras de negócio
         var produtoExistente = await _repository.ObterPorIdAsync(id);
         produtoExistente.Atualizar(request.Nome, request.Preco);
 
-        // 2. Persistência (Chama a Infraestrutura via Repositório)
         await _repository.AtualizarAsync(produtoExistente);
     }
 

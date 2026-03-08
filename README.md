@@ -66,7 +66,7 @@ Responsável por adaptar e apresentar os dados das estruturas internas para as e
 ### - **Infraestrutura** (*Infrastructure*)
 Possui os detalhes de tecnologia e ferramentas externas e implementa os detalhes concretos da aplicação, isso inclui a implementação dos `Repositórios (EF Core/SQL)`, servidores web e qualquer outro serviço externo.
 
-#### Migrations
+## Banco de Dados SQL Server com Migrations
 1. Adicionar versão
 ```powershell
 dotnet ef migrations add VersaoInicial --startup-project .\src\Api\ --project .\src\Infrastructure\

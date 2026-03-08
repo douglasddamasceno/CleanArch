@@ -1,4 +1,4 @@
-namespace Application.Services.Contracts.ProdutoContratcs;
+namespace Application.Services.Models.ProdutoModels;
 
 public class ProdutoResponse
 {
