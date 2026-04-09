@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Application.Interfaces;
 using Domain.Entities;
+using Domain.Interfaces;
 
 public class ProdutoRepository : IProdutoRepository
 {
@@ -11,31 +11,30 @@ public class ProdutoRepository : IProdutoRepository
         _context = context;
     }
 
-    public async Task AdicionarAsync(Produto produto)
+    public async Task AddAsync(Produto produto)
     {
         await _context.Produtos.AddAsync(produto);
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Produto> ObterPorIdAsync(Guid guid)
+    public async Task<Produto> FindAsync(Guid guid)
     {
         return await _context.Produtos.FirstAsync(p => p.Id == guid);
     }
 
-    public async Task<IEnumerable<Produto>> ObterTodosAsync()
+    public async Task<IEnumerable<Produto>> FindAllAsync()
     {
         return await _context.Produtos.ToListAsync();
     }
 
-    public async Task AtualizarAsync(Produto produto)
+    public async Task UpdateAsync(Produto produto)
     {
         _context.Produtos.Update(produto);
         await _context.SaveChangesAsync();
     }
 
-    public async Task RemoverAsync(Guid guid)
+    public async Task DeleteAsync(Produto produto)
     {
-        var produto = await ObterPorIdAsync(guid);
         _context.Produtos.Remove(produto);
         await _context.SaveChangesAsync();
     }
