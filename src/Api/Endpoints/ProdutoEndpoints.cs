@@ -1,5 +1,8 @@
-using Application.Services;
-using Application.Services.Models.ProdutoModels;
+using Api.Contracts;
+using Api.Extensions;
+using Api.Mappers;
+using Application.Produtos;
+using Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -14,75 +17,72 @@ public static class ProdutoEndpoints
 
         group.MapPost("/", CriarProduto)
             .WithName("CriarProduto")
-            .Produces<string>(StatusCodes.Status201Created)
+            .Produces<ProdutoResponse>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status500InternalServerError);
 
         group.MapGet("/", ObterProdutos)
             .WithName("ObterProdutos")
-            .Produces<string>(StatusCodes.Status200OK)
+            .Produces<IEnumerable<ProdutoResponse>>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status500InternalServerError);
 
         group.MapGet("/{id:guid}", ObterProdutoPorId)
             .WithName("ObterProduto")
-            .Produces<string>(StatusCodes.Status200OK)
+            .Produces<ProdutoResponse>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status500InternalServerError);
 
         group.MapPut("/{id:guid}", AtualizarProduto)
             .WithName("AtualizarProduto")
-            .Produces<string>(StatusCodes.Status200OK)
+            .Produces<ProdutoResponse>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status500InternalServerError);
 
         group.MapDelete("/{id:guid}", ExcluirProduto)
             .WithName("ExcluirProduto")
-            .Produces<string>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status500InternalServerError);
     }
 
     private static async Task<IResult> CriarProduto(
     [FromBody] CriarProdutoRequest request,
-    [FromServices] ProdutoService service)
+    [FromServices] CreateProdutoUseCase useCase)
     {
-        await service.CreateAsync(request);
-        return TypedResults.Created();
+        var result = await useCase.ExecuteAsync(request.ToCommand());
+        return result.ToResult();
     }
 
     private static async Task<IResult> ObterProdutos(
-    [FromServices] ProdutoService service)
+    [FromServices] GetAllProdutosUseCase useCase)
     {
-        var produtos = await service.GetAllAsync();
-        if (!produtos.Any() || produtos is null)
-            return TypedResults.NotFound();
-
-        return TypedResults.Ok(produtos);
+        var result = await useCase.ExecuteAsync();
+        return result.ToResult();
     }
 
     private static async Task<IResult> ObterProdutoPorId(
     [FromRoute, Required] Guid id,
-    [FromServices] ProdutoService service)
+    [FromServices] GetByIdProdutoUseCase useCase)
     {
-        var produto = await service.GetByIdAsync(id);
-        return produto is not null ? TypedResults.Ok(produto) : TypedResults.NotFound();
+        var result = await useCase.ExecuteAsync(id);
+        return result.ToResult();
     }
 
     private static async Task<IResult> AtualizarProduto(
     [FromRoute, Required] Guid id,
     [FromBody] AtualizarProdutoRequest request,
-    [FromServices] ProdutoService service)
+    [FromServices] UpdateProdutoUseCase useCase)
     {
-        await service.UpdateAsync(id, request);
-        return TypedResults.Ok();
+        var result = await useCase.ExecuteAsync(id, request.ToCommand());
+        return result.ToResult();
     }
 
     private static async Task<IResult> ExcluirProduto(
     [FromRoute, Required] Guid id,
-    [FromServices] ProdutoService service)
+    [FromServices] DeleteProdutoUseCase useCase)
     {
-        await service.DeleteAsync(id);
-        return TypedResults.Ok();
+        var result = await useCase.ExecuteAsync(id);
+        return result.ToResult();
     }
 }

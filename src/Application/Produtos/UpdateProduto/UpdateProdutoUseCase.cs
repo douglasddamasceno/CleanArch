@@ -20,13 +20,13 @@ public class UpdateProdutoUseCase
         if (id == command.Id)
             return Result<Produto>.Failure(CommonErrors.Conflict);
 
-        var _produto = await _repository.FindAsync(id);
-        if (_produto is null)
+        var produto = await _repository.FindAsync(id);
+        if (produto is null)
             return Result<Produto>.Failure(CommonErrors.NotFound);
 
-        _produto.Atualizar(command.Nome, command.Preco);
-        await _repository.UpdateAsync(_produto);
+        produto.Atualizar(command.Nome, command.Preco);
+        await _repository.UpdateAsync(produto);
 
-        return Result<Produto>.Success(_produto);
+        return Result<Produto>.Success(produto);
     }
 }

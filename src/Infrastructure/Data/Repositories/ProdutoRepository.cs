@@ -17,9 +17,9 @@ public class ProdutoRepository : IProdutoRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Produto> FindAsync(Guid guid)
+    public async Task<Produto?> FindAsync(Guid guid)
     {
-        return await _context.Produtos.FirstAsync(p => p.Id == guid);
+        return await _context.Produtos.SingleOrDefaultAsync(p => p.Id == guid);
     }
 
     public async Task<IEnumerable<Produto>> FindAllAsync()
