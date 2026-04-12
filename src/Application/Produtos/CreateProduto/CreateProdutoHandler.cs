@@ -4,11 +4,11 @@ using Domain.Interfaces;
 
 namespace Application.Produtos;
 
-public class CreateProdutoUseCase
+public class CreateProdutoHandler
 {
     private readonly IProdutoRepository _repository;
 
-    public CreateProdutoUseCase(IProdutoRepository repository)
+    public CreateProdutoHandler(IProdutoRepository repository)
     {
         _repository = repository;
     }

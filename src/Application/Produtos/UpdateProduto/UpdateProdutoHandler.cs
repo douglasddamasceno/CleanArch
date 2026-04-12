@@ -6,11 +6,11 @@ using Domain.Interfaces;
 
 namespace Application.Produtos;
 
-public class UpdateProdutoUseCase
+public class UpdateProdutoHandler
 {
     private readonly IProdutoRepository _repository;
 
-    public UpdateProdutoUseCase(IProdutoRepository repository)
+    public UpdateProdutoHandler(IProdutoRepository repository)
     {
         _repository = repository;
     }

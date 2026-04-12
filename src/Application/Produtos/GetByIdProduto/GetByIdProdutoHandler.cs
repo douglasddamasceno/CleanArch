@@ -5,11 +5,11 @@ using Domain.Interfaces;
 
 namespace Application.Produtos;
 
-public class GetByIdProdutoUseCase
+public class GetByIdProdutoHandler
 {
     private readonly IProdutoRepository _repository;
 
-    public GetByIdProdutoUseCase(IProdutoRepository repository)
+    public GetByIdProdutoHandler(IProdutoRepository repository)
     {
         _repository = repository;
     }

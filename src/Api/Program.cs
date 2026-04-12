@@ -1,15 +1,13 @@
 using Api.Endpoints;
-using CleanArch.Api.Config;
-using Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using CleanArch.Api.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddValidation();
 builder.Services.AddSwaggerConfig();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LojaConnection")));
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddHealthChecks();
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddDependencyInjectionConfig(builder.Configuration);
 
 var app = builder.Build();
 app.UseHttpsRedirection();

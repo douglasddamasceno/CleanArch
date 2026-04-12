@@ -2,7 +2,6 @@ using Api.Contracts;
 using Api.Extensions;
 using Api.Mappers;
 using Application.Produtos;
-using Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -48,41 +47,41 @@ public static class ProdutoEndpoints
 
     private static async Task<IResult> CriarProduto(
     [FromBody] CriarProdutoRequest request,
-    [FromServices] CreateProdutoUseCase useCase)
+    [FromServices] CreateProdutoHandler handler)
     {
-        var result = await useCase.ExecuteAsync(request.ToCommand());
+        var result = await handler.ExecuteAsync(request.ToCommand());
         return result.ToResult();
     }
 
     private static async Task<IResult> ObterProdutos(
-    [FromServices] GetAllProdutosUseCase useCase)
+    [FromServices] GetAllProdutosHandler handler)
     {
-        var result = await useCase.ExecuteAsync();
+        var result = await handler.ExecuteAsync();
         return result.ToResult();
     }
 
     private static async Task<IResult> ObterProdutoPorId(
     [FromRoute, Required] Guid id,
-    [FromServices] GetByIdProdutoUseCase useCase)
+    [FromServices] GetByIdProdutoHandler handler)
     {
-        var result = await useCase.ExecuteAsync(id);
+        var result = await handler.ExecuteAsync(id);
         return result.ToResult();
     }
 
     private static async Task<IResult> AtualizarProduto(
     [FromRoute, Required] Guid id,
     [FromBody] AtualizarProdutoRequest request,
-    [FromServices] UpdateProdutoUseCase useCase)
+    [FromServices] UpdateProdutoHandler handler)
     {
-        var result = await useCase.ExecuteAsync(id, request.ToCommand());
+        var result = await handler.ExecuteAsync(id, request.ToCommand());
         return result.ToResult();
     }
 
     private static async Task<IResult> ExcluirProduto(
     [FromRoute, Required] Guid id,
-    [FromServices] DeleteProdutoUseCase useCase)
+    [FromServices] DeleteProdutoHandler handler)
     {
-        var result = await useCase.ExecuteAsync(id);
+        var result = await handler.ExecuteAsync(id);
         return result.ToResult();
     }
 }
