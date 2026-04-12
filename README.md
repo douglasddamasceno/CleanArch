@@ -18,6 +18,7 @@ A organização da arquitetura se dá em anéis concêntricos, regidos pela Regr
 ![Clean Architecture](image.png)
 
 - **Estrutura de Pastas da Solução**
+```
 App
 ├── 📁 Api
 │   ├── 📁 Config
